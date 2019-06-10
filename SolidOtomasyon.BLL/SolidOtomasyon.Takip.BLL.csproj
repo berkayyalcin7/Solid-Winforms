@@ -31,8 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,7 +50,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseBll.cs" />
+    <Compile Include="Functions\Converts.cs" />
+    <Compile Include="Functions\GeneralFunctions.cs" />
+    <Compile Include="General\OkulBll.cs" />
+    <Compile Include="Interfaces\IBaseBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SolidOtomasyon.DAL\SolidOtomasyon.DAL.csproj">
+      <Project>{3B424B18-AA29-4317-AED0-4D877EF64A92}</Project>
+      <Name>SolidOtomasyon.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolidOtomasyon.Takip.Common\SolidOtomasyon.Takip.Common.csproj">
+      <Project>{BA3DA0DA-4BAE-448D-BEC2-EC7800E6C0B1}</Project>
+      <Name>SolidOtomasyon.Takip.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolidOtomasyon.Takip.Data\SolidOtomasyon.Takip.Data.csproj">
+      <Project>{2E57CAD7-FF76-4C73-B221-160848CDC8B6}</Project>
+      <Name>SolidOtomasyon.Takip.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolidOtomasyon.Takip.Model\SolidOtomasyon.Takip.Model.csproj">
+      <Project>{E907108D-0E22-4810-8F55-AB22F6578A43}</Project>
+      <Name>SolidOtomasyon.Takip.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

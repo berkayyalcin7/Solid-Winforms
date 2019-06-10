@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,7 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\OkulDto.cs" />
+    <Compile Include="Entities\Base\BaseEntity.cs" />
+    <Compile Include="Entities\Base\BaseEntityDurum.cs" />
+    <Compile Include="Entities\Base\BaseHareketEntity.cs" />
+    <Compile Include="Entities\Base\Interfaces\IBaseEntity.cs" />
+    <Compile Include="Entities\Il.cs" />
+    <Compile Include="Entities\Ilce.cs" />
+    <Compile Include="Entities\Okul.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

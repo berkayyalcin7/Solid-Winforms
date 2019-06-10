@@ -78,6 +78,11 @@
             DevExpress.Utils.ToolTipItem toolTipItem10 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem10 = new DevExpress.Utils.ToolTipSeparatorItem();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem20 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip11 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem21 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem11 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem11 = new DevExpress.Utils.ToolTipSeparatorItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem22 = new DevExpress.Utils.ToolTipTitleItem();
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnYeni = new DevExpress.XtraBars.BarButtonItem();
             this.btnSil = new DevExpress.XtraBars.BarButtonItem();
@@ -89,6 +94,27 @@
             this.btnYazdir = new DevExpress.XtraBars.BarButtonItem();
             this.btnCikis = new DevExpress.XtraBars.BarButtonItem();
             this.btnGonder = new DevExpress.XtraBars.BarSubItem();
+            this.barInsert = new DevExpress.XtraBars.BarStaticItem();
+            this.barInsertAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.barDelete = new DevExpress.XtraBars.BarStaticItem();
+            this.barDeleteAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.barEnter = new DevExpress.XtraBars.BarStaticItem();
+            this.barEnterAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.barEdit = new DevExpress.XtraBars.BarStaticItem();
+            this.barEditAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.barYenile = new DevExpress.XtraBars.BarStaticItem();
+            this.barYenileAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.barFiltrele = new DevExpress.XtraBars.BarStaticItem();
+            this.barFiltreleAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.barKolonlar = new DevExpress.XtraBars.BarStaticItem();
+            this.barKolonlarAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.barYazdir = new DevExpress.XtraBars.BarStaticItem();
+            this.barYazdirAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.barGonder = new DevExpress.XtraBars.BarStaticItem();
+            this.barGonderAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.barCikis = new DevExpress.XtraBars.BarStaticItem();
+            this.barCikisAciklama = new DevExpress.XtraBars.BarStaticItem();
+            this.btnAktifPasifKartlar = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -112,9 +138,30 @@
             this.btnKolonlar,
             this.btnYazdir,
             this.btnCikis,
-            this.btnGonder});
+            this.btnGonder,
+            this.barInsert,
+            this.barInsertAciklama,
+            this.barDelete,
+            this.barDeleteAciklama,
+            this.barEnter,
+            this.barEnterAciklama,
+            this.barEdit,
+            this.barEditAciklama,
+            this.barYenile,
+            this.barYenileAciklama,
+            this.barFiltrele,
+            this.barFiltreleAciklama,
+            this.barKolonlar,
+            this.barKolonlarAciklama,
+            this.barYazdir,
+            this.barYazdirAciklama,
+            this.barGonder,
+            this.barGonderAciklama,
+            this.barCikis,
+            this.barCikisAciklama,
+            this.btnAktifPasifKartlar});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 12;
+            this.ribbonControl.MaxItemId = 34;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -127,7 +174,7 @@
             this.ribbonControl.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Hide;
             this.ribbonControl.ShowQatLocationSelector = false;
             this.ribbonControl.ShowToolbarCustomizeItem = false;
-            this.ribbonControl.Size = new System.Drawing.Size(689, 102);
+            this.ribbonControl.Size = new System.Drawing.Size(1036, 102);
             this.ribbonControl.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl.Toolbar.ShowCustomizeItem = false;
             this.ribbonControl.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
@@ -343,6 +390,202 @@
             superToolTip10.Items.Add(toolTipTitleItem20);
             this.btnGonder.SuperTip = superToolTip10;
             // 
+            // barInsert
+            // 
+            this.barInsert.Caption = "Insert :";
+            this.barInsert.Id = 12;
+            this.barInsert.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.barInsert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barInsert.ItemAppearance.Normal.Options.UseFont = true;
+            this.barInsert.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barInsert.Name = "barInsert";
+            // 
+            // barInsertAciklama
+            // 
+            this.barInsertAciklama.Caption = "Yeni";
+            this.barInsertAciklama.Id = 13;
+            this.barInsertAciklama.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.barInsertAciklama.ItemAppearance.Normal.Options.UseFont = true;
+            this.barInsertAciklama.Name = "barInsertAciklama";
+            // 
+            // barDelete
+            // 
+            this.barDelete.Caption = "Delete :";
+            this.barDelete.Id = 14;
+            this.barDelete.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.barDelete.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barDelete.ItemAppearance.Normal.Options.UseFont = true;
+            this.barDelete.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barDelete.Name = "barDelete";
+            // 
+            // barDeleteAciklama
+            // 
+            this.barDeleteAciklama.Caption = "Sil";
+            this.barDeleteAciklama.Id = 15;
+            this.barDeleteAciklama.Name = "barDeleteAciklama";
+            // 
+            // barEnter
+            // 
+            this.barEnter.Caption = "Enter :";
+            this.barEnter.Id = 16;
+            this.barEnter.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.barEnter.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barEnter.ItemAppearance.Normal.Options.UseFont = true;
+            this.barEnter.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barEnter.Name = "barEnter";
+            // 
+            // barEnterAciklama
+            // 
+            this.barEnterAciklama.Caption = "Seç";
+            this.barEnterAciklama.Id = 17;
+            this.barEnterAciklama.Name = "barEnterAciklama";
+            // 
+            // barEdit
+            // 
+            this.barEdit.Caption = "F3 :";
+            this.barEdit.Id = 18;
+            this.barEdit.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.barEdit.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barEdit.ItemAppearance.Normal.Options.UseFont = true;
+            this.barEdit.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barEdit.Name = "barEdit";
+            // 
+            // barEditAciklama
+            // 
+            this.barEditAciklama.Caption = "Düzenle";
+            this.barEditAciklama.Id = 19;
+            this.barEditAciklama.Name = "barEditAciklama";
+            // 
+            // barYenile
+            // 
+            this.barYenile.Caption = "F5 :";
+            this.barYenile.Id = 20;
+            this.barYenile.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.barYenile.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barYenile.ItemAppearance.Normal.Options.UseFont = true;
+            this.barYenile.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barYenile.Name = "barYenile";
+            // 
+            // barYenileAciklama
+            // 
+            this.barYenileAciklama.Caption = "Yenile";
+            this.barYenileAciklama.Id = 21;
+            this.barYenileAciklama.Name = "barYenileAciklama";
+            // 
+            // barFiltrele
+            // 
+            this.barFiltrele.Caption = "F8 :";
+            this.barFiltrele.Id = 23;
+            this.barFiltrele.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.barFiltrele.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barFiltrele.ItemAppearance.Normal.Options.UseFont = true;
+            this.barFiltrele.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barFiltrele.Name = "barFiltrele";
+            // 
+            // barFiltreleAciklama
+            // 
+            this.barFiltreleAciklama.Caption = "Filtrele";
+            this.barFiltreleAciklama.Id = 24;
+            this.barFiltreleAciklama.Name = "barFiltreleAciklama";
+            // 
+            // barKolonlar
+            // 
+            this.barKolonlar.Caption = "CTRL+O :";
+            this.barKolonlar.Id = 25;
+            this.barKolonlar.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.barKolonlar.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barKolonlar.ItemAppearance.Normal.Options.UseFont = true;
+            this.barKolonlar.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barKolonlar.Name = "barKolonlar";
+            // 
+            // barKolonlarAciklama
+            // 
+            this.barKolonlarAciklama.Caption = "Kolonlar";
+            this.barKolonlarAciklama.Id = 26;
+            this.barKolonlarAciklama.Name = "barKolonlarAciklama";
+            // 
+            // barYazdir
+            // 
+            this.barYazdir.Caption = "CTRL+P :";
+            this.barYazdir.Id = 27;
+            this.barYazdir.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.barYazdir.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barYazdir.ItemAppearance.Normal.Options.UseFont = true;
+            this.barYazdir.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barYazdir.Name = "barYazdir";
+            // 
+            // barYazdirAciklama
+            // 
+            this.barYazdirAciklama.Caption = "Yazdır";
+            this.barYazdirAciklama.Id = 28;
+            this.barYazdirAciklama.Name = "barYazdirAciklama";
+            // 
+            // barGonder
+            // 
+            this.barGonder.Caption = "F12 :";
+            this.barGonder.Id = 29;
+            this.barGonder.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.barGonder.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barGonder.ItemAppearance.Normal.Options.UseFont = true;
+            this.barGonder.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barGonder.Name = "barGonder";
+            // 
+            // barGonderAciklama
+            // 
+            this.barGonderAciklama.Caption = "Gönder";
+            this.barGonderAciklama.Id = 30;
+            this.barGonderAciklama.Name = "barGonderAciklama";
+            // 
+            // barCikis
+            // 
+            this.barCikis.Caption = "ESC :";
+            this.barCikis.Id = 31;
+            this.barCikis.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.barCikis.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DarkBlue;
+            this.barCikis.ItemAppearance.Normal.Options.UseFont = true;
+            this.barCikis.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barCikis.Name = "barCikis";
+            // 
+            // barCikisAciklama
+            // 
+            this.barCikisAciklama.Caption = "Çıkış";
+            this.barCikisAciklama.Id = 32;
+            this.barCikisAciklama.Name = "barCikisAciklama";
+            // 
+            // btnAktifPasifKartlar
+            // 
+            this.btnAktifPasifKartlar.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.btnAktifPasifKartlar.Caption = "Pasif Kartlar";
+            this.btnAktifPasifKartlar.Id = 33;
+            this.btnAktifPasifKartlar.ImageOptions.Image = global::SolidOtomasyon.Properties.Resources.article_16x16;
+            this.btnAktifPasifKartlar.ImageOptions.LargeImage = global::SolidOtomasyon.Properties.Resources.article_32x32;
+            this.btnAktifPasifKartlar.ItemAppearance.Hovered.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnAktifPasifKartlar.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.DarkBlue;
+            this.btnAktifPasifKartlar.ItemAppearance.Hovered.Options.UseFont = true;
+            this.btnAktifPasifKartlar.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnAktifPasifKartlar.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnAktifPasifKartlar.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Maroon;
+            this.btnAktifPasifKartlar.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnAktifPasifKartlar.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnAktifPasifKartlar.ItemAppearance.Pressed.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnAktifPasifKartlar.ItemAppearance.Pressed.ForeColor = System.Drawing.Color.Maroon;
+            this.btnAktifPasifKartlar.ItemAppearance.Pressed.Options.UseFont = true;
+            this.btnAktifPasifKartlar.ItemAppearance.Pressed.Options.UseForeColor = true;
+            this.btnAktifPasifKartlar.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L));
+            this.btnAktifPasifKartlar.Name = "btnAktifPasifKartlar";
+            toolTipTitleItem21.ImageOptions.Image = global::SolidOtomasyon.Properties.Resources.comment_16x16;
+            toolTipTitleItem21.Text = "( CTRL + L )";
+            toolTipItem11.ImageOptions.Image = global::SolidOtomasyon.Properties.Resources.suggestion_16x16;
+            toolTipItem11.LeftIndent = 6;
+            toolTipItem11.Text = "Aktif veya Pasif Kartları Listele";
+            toolTipTitleItem22.LeftIndent = 6;
+            toolTipTitleItem22.Text = "Aktif veya Pasif Kartları Listeler\r\n";
+            superToolTip11.Items.Add(toolTipTitleItem21);
+            superToolTip11.Items.Add(toolTipItem11);
+            superToolTip11.Items.Add(toolTipSeparatorItem11);
+            superToolTip11.Items.Add(toolTipTitleItem22);
+            this.btnAktifPasifKartlar.SuperTip = superToolTip11;
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -367,10 +610,31 @@
             // 
             // ribbonStatusBar1
             // 
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 480);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barInsert);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barInsertAciklama);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barDelete, true);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barDeleteAciklama);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barEnter, true);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barEnterAciklama);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barEdit, true);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barEditAciklama);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barYenile);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barYenileAciklama, true);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barFiltrele, true);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barFiltreleAciklama);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barKolonlar, true);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barKolonlarAciklama);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barYazdir, true);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barYazdirAciklama);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barGonder, true);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barGonderAciklama);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barCikis, true);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barCikisAciklama);
+            this.ribbonStatusBar1.ItemLinks.Add(this.btnAktifPasifKartlar);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 476);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(689, 31);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1036, 31);
             // 
             // ribbonPage2
             // 
@@ -381,7 +645,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 511);
+            this.ClientSize = new System.Drawing.Size(1036, 507);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl);
             this.MinimizeBox = false;
@@ -397,12 +661,7 @@
         }
 
         #endregion
-
-        private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.BarButtonItem btnYeni;
         private DevExpress.XtraBars.BarButtonItem btnSil;
         private DevExpress.XtraBars.BarButtonItem btnSec;
@@ -413,5 +672,30 @@
         private DevExpress.XtraBars.BarButtonItem btnYazdir;
         private DevExpress.XtraBars.BarButtonItem btnCikis;
         private DevExpress.XtraBars.BarSubItem btnGonder;
+        private DevExpress.XtraBars.BarStaticItem barInsert;
+        private DevExpress.XtraBars.BarStaticItem barInsertAciklama;
+        private DevExpress.XtraBars.BarStaticItem barDelete;
+        private DevExpress.XtraBars.BarStaticItem barDeleteAciklama;
+        private DevExpress.XtraBars.BarStaticItem barEnter;
+        private DevExpress.XtraBars.BarStaticItem barEnterAciklama;
+        private DevExpress.XtraBars.BarStaticItem barEdit;
+        private DevExpress.XtraBars.BarStaticItem barEditAciklama;
+        protected DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.BarStaticItem barYenile;
+        private DevExpress.XtraBars.BarStaticItem barYenileAciklama;
+        private DevExpress.XtraBars.BarStaticItem barFiltrele;
+        private DevExpress.XtraBars.BarStaticItem barFiltreleAciklama;
+        private DevExpress.XtraBars.BarStaticItem barKolonlar;
+        private DevExpress.XtraBars.BarStaticItem barKolonlarAciklama;
+        private DevExpress.XtraBars.BarStaticItem barYazdir;
+        private DevExpress.XtraBars.BarStaticItem barYazdirAciklama;
+        private DevExpress.XtraBars.BarStaticItem barGonder;
+        private DevExpress.XtraBars.BarStaticItem barGonderAciklama;
+        private DevExpress.XtraBars.BarStaticItem barCikis;
+        private DevExpress.XtraBars.BarStaticItem barCikisAciklama;
+        private DevExpress.XtraBars.BarButtonItem btnAktifPasifKartlar;
     }
 }

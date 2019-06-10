@@ -66,7 +66,7 @@ namespace SolidOtomasyon.UserControls.Controls
             grp.OptionsTableLayoutGroup.ColumnDefinitions.Add(new ColumnDefinition
             {
                 SizeType = SizeType.Absolute,
-                Width = 90
+                Width = 99
             });
 
             //Şimdi Row - Satır kullanacağız -> Otomatik oluşan Satırları temizledik
