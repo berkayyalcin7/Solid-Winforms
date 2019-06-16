@@ -44,7 +44,14 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress 18.2\Components\Bin\Framework\DevExpress.XtraLayout.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraPrinting.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -57,34 +64,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\BaseForms\BaseKartForm.cs">
+    <Compile Include="Forms\BaseForms\BaseEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\BaseForms\BaseKartForm.Designer.cs">
-      <DependentUpon>BaseKartForm.cs</DependentUpon>
+    <Compile Include="Forms\BaseForms\BaseEditForm.Designer.cs">
+      <DependentUpon>BaseEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\BaseForms\BaseKartlarForm.cs">
+    <Compile Include="Forms\BaseForms\BaseListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\BaseForms\BaseKartlarForm.Designer.cs">
-      <DependentUpon>BaseKartlarForm.cs</DependentUpon>
+    <Compile Include="Forms\BaseForms\BaseListForm.Designer.cs">
+      <DependentUpon>BaseListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OkulForms\OkulKarti.cs">
+    <Compile Include="Forms\MainForms\AnaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\OkulForms\OkulKarti.Designer.cs">
-      <DependentUpon>OkulKarti.cs</DependentUpon>
+    <Compile Include="Forms\MainForms\AnaForm.Designer.cs">
+      <DependentUpon>AnaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OkulForms\OkulKartlari.cs">
+    <Compile Include="Forms\OkulForms\OkulEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\OkulForms\OkulKartlari.Designer.cs">
-      <DependentUpon>OkulKartlari.cs</DependentUpon>
+    <Compile Include="Forms\OkulForms\OkulEditForm.Designer.cs">
+      <DependentUpon>OkulEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OkulForms\OkulListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OkulForms\OkulListForm.Designer.cs">
+      <DependentUpon>OkulListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IStatusBarAciklama.cs" />
     <Compile Include="Interfaces\IStatusBarKisaYol.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Show\Interfaces\IBaseFormShow.cs" />
+    <Compile Include="Show\ShowEditForms.cs" />
+    <Compile Include="Show\ShowListForms.cs" />
     <Compile Include="UserControls\Controls\MyButtonEdit.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -169,17 +185,20 @@
     <Compile Include="UserControls\Navigators\SmallNavigator.Designer.cs">
       <DependentUpon>SmallNavigator.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\BaseForms\BaseKartForm.resx">
-      <DependentUpon>BaseKartForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\BaseForms\BaseEditForm.resx">
+      <DependentUpon>BaseEditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BaseForms\BaseKartlarForm.resx">
-      <DependentUpon>BaseKartlarForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\BaseForms\BaseListForm.resx">
+      <DependentUpon>BaseListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OkulForms\OkulKarti.resx">
-      <DependentUpon>OkulKarti.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForms\AnaForm.resx">
+      <DependentUpon>AnaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OkulForms\OkulKartlari.resx">
-      <DependentUpon>OkulKartlari.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\OkulForms\OkulEditForm.resx">
+      <DependentUpon>OkulEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OkulForms\OkulListForm.resx">
+      <DependentUpon>OkulListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -201,6 +220,7 @@
     <EmbeddedResource Include="UserControls\Navigators\SmallNavigator.resx">
       <DependentUpon>SmallNavigator.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -388,5 +408,35 @@
   <ItemGroup>
     <None Include="Resources\article_32x32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SolidOtomasyon.BLL\SolidOtomasyon.Takip.BLL.csproj">
+      <Project>{B3F1E923-9988-40E0-8BC7-B4A3E891EA3C}</Project>
+      <Name>SolidOtomasyon.Takip.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolidOtomasyon.Takip.Common\SolidOtomasyon.Takip.Common.csproj">
+      <Project>{BA3DA0DA-4BAE-448D-BEC2-EC7800E6C0B1}</Project>
+      <Name>SolidOtomasyon.Takip.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolidOtomasyon.Takip.Model\SolidOtomasyon.Takip.Model.csproj">
+      <Project>{E907108D-0E22-4810-8F55-AB22F6578A43}</Project>
+      <Name>SolidOtomasyon.Takip.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttoxlsx_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttoxlsx_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttodocx_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttopdf_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttotxt_32x32.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

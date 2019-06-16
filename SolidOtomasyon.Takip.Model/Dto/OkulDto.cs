@@ -2,6 +2,7 @@
 using SolidOtomasyon.Takip.Model.Entities.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,9 @@ using System.Threading.Tasks;
 namespace SolidOtomasyon.Takip.Model.Dto
 {
     //Dosya ismi OkulDto kalıcak class değişecek
-    //Attr Olacak --- 
     //OkulS : Single'ı ifade edicek OkulL : List'i ifade edecektir.
+    //Burada 'ki 2 property vt ' ye eklenmeyecek bunun için NotMapped Kullancağız
+    [NotMapped]
     public class OkulS : Okul
     {
         //DTO ' lar ilişkilendirilmiş tablolardaki diğer propertyleri çekmemize yarayacak.
@@ -32,4 +34,4 @@ namespace SolidOtomasyon.Takip.Model.Dto
 
     }
 }
-}
+

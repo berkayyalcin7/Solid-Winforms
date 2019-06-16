@@ -1,4 +1,6 @@
 ﻿using SolidOtomasyon.Takip.Model.Entities.Base.Interfaces;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SolidOtomasyon.Takip.Model.Entities.Base
 {
@@ -6,9 +8,13 @@ namespace SolidOtomasyon.Takip.Model.Entities.Base
     public class BaseEntity:IBaseEntity
     {
         //Buradaki Id'yi biz oluşturacağımız için long veri tipinde atadık.
+        // Id Kolonu Kayıt ederken 0. indexe yerleştir ve ID 'yi otomatik atamayı None yapıyoruz.
+        [Column(Order =0),Key,DatabaseGenerated(DatabaseGeneratedOption.None)]         
         public long Id { get; set; }
-
-        public string Kod { get; set; }
+        //Kendimiz Attr oluşturup burada tanımlayacağız Validation işlemleri için
+        [Column(Order = 1),Required,StringLength(20)]
+        //Virtual ' ı override edip index uygulayacağıımız yaptık
+        public virtual string Kod { get; set; }
 
     }
 }

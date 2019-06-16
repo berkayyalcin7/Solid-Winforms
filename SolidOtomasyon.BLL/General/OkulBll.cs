@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace SolidOtomasyon.BLL.General
 {
@@ -15,11 +16,11 @@ namespace SolidOtomasyon.BLL.General
     public class OkulBll : BaseBll<Okul, OgrenciTakipContext>
     {
         //Ctor 'leri oluşturuyoruz : İşlem Yapmayacağız ...
-        protected OkulBll()
+        public OkulBll()
         {
         }
 
-        protected OkulBll(Control ctrl) : base(ctrl) { }
+        public OkulBll(Control ctrl) : base(ctrl) { }
 
         //BaseBll'deki Single TResult Türünde ve TResult ise BaseEntity olacağı için geriye BaseEntity gönderecek.
         public BaseEntity Single(Expression<Func<Okul, bool>> filter)
@@ -43,6 +44,8 @@ namespace SolidOtomasyon.BLL.General
 
         public IEnumerable<BaseEntity> List(Expression<Func<Okul, bool>> filter)
         {
+            //BaseList IQueryable türünde döndüğü için bunu ekrana getirirken sıralama ve Listeleme yapıyoruz.
+            //Burada ToList() döndürmemizin sebebi OrderBy ile filtre uygulamamız . Yani İlk Sıralama Sonra Listeleme işlemi
             return BaseList(filter, x => new OkulL
             {
                 Id = x.Id,
@@ -51,7 +54,7 @@ namespace SolidOtomasyon.BLL.General
                 IlAdi = x.Il.IlAdi,
                 IlceAdi = x.Ilce.IlceAdi,
                 Aciklama = x.Aciklama,
-            });
+            }).OrderBy(x=>x.Kod).ToList();
         }
 
         public bool Insert(BaseEntity entity)
