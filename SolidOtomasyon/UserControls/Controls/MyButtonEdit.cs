@@ -58,6 +58,8 @@ namespace SolidOtomasyon.UserControls.Controls
 
                 // 12 ) 7.1 maddedeki'nin alternatifi ID değişme Event'ini tetiklemiş olduk. -> IdChanged?.Invoke ile Null değilse eventi tetikle  kontrolü sağlıyoruz
                 IdChanged(this, new IdChangedEventArgs(oldValue, newValue));
+               
+                EnabledChange(this, EventArgs.Empty);
 
             }
         }
@@ -65,7 +67,7 @@ namespace SolidOtomasyon.UserControls.Controls
         // 7 ->  ID ' özelliği ile değişimleri yakalayabileceğiz -> ID Changed Event Delegate Tanımlayacağız -> Daha Sonra Tanımladığımız  IdChangedEventArgs sınıfını Handler ediyoruz.
 
         public event EventHandler<IdChangedEventArgs> IdChanged = delegate { }; // 7.1 -> asla NULL'a düşmemek istersek =delegate{  }; ile boş bir delege atayacak. 
-
+        public event EventHandler EnabledChange = delegate { };
         #endregion
 
     }

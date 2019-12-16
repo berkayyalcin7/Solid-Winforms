@@ -9,11 +9,12 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Windows.Forms;
 using System.Linq;
+using SolidOtomasyon.BLL.Interfaces;
 
 namespace SolidOtomasyon.BLL.General
 {
     //Burada Okul Entity'si ve OgrenciTakipContext'ini kullanacağız.
-    public class OkulBll : BaseBll<Okul, OgrenciTakipContext>
+    public class OkulBll : BaseBll<Okul, OgrenciTakipContext>,IBaseGenelBll,IBaseCommonBll
     {
         //Ctor 'leri oluşturuyoruz : İşlem Yapmayacağız ...
         public OkulBll()
@@ -76,7 +77,10 @@ namespace SolidOtomasyon.BLL.General
 
         }
 
-
-
+        public string YeniKodVer()
+        {
+            //tür ve filter verdik -> Kod alanınını getir
+            return BaseYeniKodVer(KartTuru.Okul, x => x.Kod);
+        }
     }
 }

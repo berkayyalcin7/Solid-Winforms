@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnOkulKartlari = new DevExpress.XtraBars.BarButtonItem();
+            this.btnIlKartlari = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -45,9 +46,11 @@
             this.ribbonControl.ExpandCollapseItem.Id = 0;
             this.ribbonControl.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl.ExpandCollapseItem,
-            this.btnOkulKartlari});
+            this.ribbonControl.SearchEditItem,
+            this.btnOkulKartlari,
+            this.btnIlKartlari});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 2;
+            this.ribbonControl.MaxItemId = 3;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -58,7 +61,15 @@
             // 
             this.btnOkulKartlari.Caption = "Okul Kartları";
             this.btnOkulKartlari.Id = 1;
+            this.btnOkulKartlari.ImageOptions.Image = global::SolidOtomasyon.Properties.Resources.home_16x16;
+            this.btnOkulKartlari.ImageOptions.LargeImage = global::SolidOtomasyon.Properties.Resources.home_32x32;
             this.btnOkulKartlari.Name = "btnOkulKartlari";
+            // 
+            // btnIlKartlari
+            // 
+            this.btnIlKartlari.Caption = "İl Kartları";
+            this.btnIlKartlari.Id = 2;
+            this.btnIlKartlari.Name = "btnIlKartlari";
             // 
             // ribbonPage1
             // 
@@ -70,6 +81,7 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.btnOkulKartlari);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnIlKartlari);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // ribbonStatusBar1
@@ -117,5 +129,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.BarButtonItem btnOkulKartlari;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager;
+        private DevExpress.XtraBars.BarButtonItem btnIlKartlari;
     }
 }

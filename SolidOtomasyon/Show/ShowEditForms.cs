@@ -38,6 +38,29 @@ namespace SolidOtomasyon.Show
             }
         }
 
+        //İlçe Edit Form'ları için gerekli prm olarak Il Adi ve Il Id allacak
+        public static long ShowDialogEditForm(KartTuru kartTuru, long id,params object[] prm) //,params object[] pre)
+        {
+   
+  
+            using (var frm = (TForm)Activator.CreateInstance(typeof(TForm),prm))
+            {
+
+                frm.IslemTuru = id > 0 ? IslemTuru.EntityUpdate : IslemTuru.EntityInsert;
+                //Id : BaseEditForm'dan gelecek Id  
+                frm.Id = id;
+                //Formu Yükleme işlemi
+                frm.Yukle();
+                //Daha Sonra Dialog olarak açılacak
+                frm.ShowDialog();
+
+                //Formun içerisinde değişiklik var ise kontrol işlemi
+                return frm.RefreshYapilacak ? frm.Id : 0;
+
+
+            }
+        }
+
 
 
 

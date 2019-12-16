@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using SolidOtomasyon.BLL.General;
 using SolidOtomasyon.Forms.BaseForms;
-using SolidOtomasyon.BLL.General;
+using SolidOtomasyon.Functions;
+using SolidOtomasyon.Show;
+using SolidOtomasyon.Takip.Common.Enums;
+using SolidOtomasyon.Takip.Model.Entities;
 
 namespace SolidOtomasyon.Forms.OkulForms
 {
@@ -19,13 +13,31 @@ namespace SolidOtomasyon.Forms.OkulForms
         public OkulListForm()
         {
             InitializeComponent();
+            Bll = new OkulBll();
+            ////Geçici Olarak Vt'nin oluşması için tetikliyoruz.
+            //OkulBll bll = new OkulBll();
 
-            //Geçici Olarak Vt'nin oluşması için tetikliyoruz.
-            OkulBll bll = new OkulBll();
+            ////Gerekli Model Referansını ekliyoruz
+            //grid.DataSource = bll.List(null);
 
-            //Gerekli Model Referansını ekliyoruz
-            grid.DataSource = bll.List(null);
+        }
 
+        // İçerikler doldurulacak -> BaseListForm'a gönderilecek değerler burada dolacak Tablo vs 
+        protected override void DegiskenleriDoldur()
+        {
+            Tablo = tablo;
+            //BaseListForm'dan gelen
+            BaseKartTuru = KartTuru.Okul;
+            //Double Click' olayında OkulEditForm açılacak
+            FormShow = new ShowEditForms<OkulEditForm>();
+            Navigator = longNavigator1.Navigator;
+
+        }
+
+        protected override void Listele()
+        {
+            //List İçerisine filtre göndereceğiz
+            Tablo.GridControl.DataSource = ((OkulBll)Bll).List(FilterFunctions.Filter<Okul>(AktifKartlariGoster));
         }
 
     }

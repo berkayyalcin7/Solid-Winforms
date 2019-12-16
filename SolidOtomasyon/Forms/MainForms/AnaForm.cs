@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using DevExpress.XtraBars;
+﻿using DevExpress.XtraBars;
+using SolidOtomasyon.Forms.IlForms;
 using SolidOtomasyon.Forms.OkulForms;
+using SolidOtomasyon.Show;
+using SolidOtomasyon.Takip.Common.Enums;
 
 namespace SolidOtomasyon.Forms.MainForms
 {
@@ -45,10 +38,11 @@ namespace SolidOtomasyon.Forms.MainForms
         {
             if(e.Item == btnOkulKartlari)
             {
-                OkulListForm frm = new OkulListForm();
-                //Aktif olan formun içinde aç
-                frm.MdiParent = ActiveForm;
-                frm.Show();
+                ShowListForms<OkulListForm>.ShowListForm(KartTuru.Okul);
+            }
+            else if(e.Item==btnIlKartlari)
+            {
+                ShowListForms<IlListForm>.ShowListForm(KartTuru.Il);
             }
         }
     }

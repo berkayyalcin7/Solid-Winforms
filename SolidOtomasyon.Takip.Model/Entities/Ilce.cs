@@ -1,4 +1,5 @@
-﻿using SolidOtomasyon.Takip.Model.Entities.Base;
+﻿using SolidOtomasyon.Takip.Model.Attributes;
+using SolidOtomasyon.Takip.Model.Entities.Base;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +11,8 @@ namespace SolidOtomasyon.Takip.Model.Entities
         [Index("IX_Kod", IsUnique = false)]
         public override string Kod { get; set; }
 
-        [Required,StringLength(50)]
+        
+        [Required,StringLength(50),ZorunluAlan("İlçe Adı", "txtIlceAdi")]
         public string IlceAdi { get; set; }
 
         [StringLength(400)]

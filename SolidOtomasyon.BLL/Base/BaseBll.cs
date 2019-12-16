@@ -4,6 +4,7 @@ using SolidOtomasyon.DAL.Interfaces;
 using SolidOtomasyon.Takip.Common.Enums;
 using SolidOtomasyon.Takip.Common.Functions;
 using SolidOtomasyon.Takip.Common.Message;
+using SolidOtomasyon.Takip.Model.Attributes;
 using SolidOtomasyon.Takip.Model.Entities.Base;
 using System;
 using System.Data.Entity;
@@ -20,6 +21,85 @@ namespace SolidOtomasyon.BLL.Base
 
         //Repository'mize UnitOfWork üzerinden erişeceğiz
         private IUnitOfWork<T> _uow;
+
+        private bool Validation(IslemTuru islemTuru, BaseEntity oldEntity, BaseEntity currentEntity, Expression<Func<T, bool>> filter)
+        {
+            var errorControl = GetValidationErrorControl();
+
+            if (errorControl == null) return true;
+            //Hatalı olan kontrole focuslan
+            _ctrl.Controls[errorControl].Focus();
+            return false;
+
+            string GetValidationErrorControl()
+            {
+
+                string VarOlanKod()
+                {
+                    foreach (var property in typeof(T).GetPropertyAttributeFromType<Kod>())
+                    {
+                        //Kod alanını arayacağız
+                        if (property.Attribute == null)
+                            continue;
+
+
+                        if ((islemTuru == IslemTuru.EntityInsert || oldEntity.Kod == currentEntity.Kod) && islemTuru == IslemTuru.EntityUpdate)
+                        {
+                            continue;
+                        }
+                        //Veritabanına Kodu gönderdikten sonra olup olmadığı kontrolü eğer yok ise continue ile işleme devam et
+                        if (_uow.Rep.Count(filter) < 1)
+                        {
+                            continue;
+                        }
+                        // Örnek-> Kod
+                        Messages.VarOlanKodKayitHataMesaji(property.Attribute.Description);
+                        //Hatanın oluşmuş olduğu control
+                        return property.Attribute.ControlName;
+
+
+                    }
+                    return null;
+                }
+
+                string HataliGiris()
+                {
+                    foreach (var property in typeof(T).GetPropertyAttributeFromType<ZorunluAlan>())
+                    {
+                        //Kod alanını arayacağız
+                        if (property.Attribute == null)
+                            continue;
+
+                        var value = property.Property.GetValue(currentEntity);
+
+                        //long 0 geliyorsa null olarak ata
+                        if (property.Property.PropertyType == typeof(long))
+                        {
+                            if ((long)value == 0)
+                            {
+                                value = null;
+                            }
+                        }
+
+                        //Yukarıdan gelen value null değil ise stringe çevir ve kontrol et 
+                        if (!string.IsNullOrEmpty(value?.ToString()))
+                        {
+                            continue;
+                        }
+
+                        Messages.HataliVeriMesaji(property.Attribute.Description);
+                        //Hatanın oluşmuş olduğu control
+                        return property.Attribute.ControlName;
+                    }
+
+                    return null;
+                }
+                // İlk olarak Hatali Girişi kontrol ediyoruz daha sonra VarOlanKod Kontrolü yapıyoruz 
+                return HataliGiris() ?? VarOlanKod();
+            }
+
+
+        }
 
 
         //Sadece implemente edeen classların erişimi için protected tanımlıyoruz
@@ -55,7 +135,11 @@ namespace SolidOtomasyon.BLL.Base
         protected bool BaseInsert(BaseEntity entity, Expression<Func<T, bool>> filter)
         {
             GeneralFunctions.CreateUnitOfWork<T, TContext>(ref _uow);
-            //Validation İşlemleri yapılacak ...
+
+            if (!Validation(IslemTuru.EntityInsert, null, entity, filter))
+            {
+                return false;
+            }
 
             //Repository'e OgrenciTakipContext'de tanımlanmış entitylerden birisini atıyoruz T
             _uow.Rep.Insert(entity.EntityConvert<T>());
@@ -68,6 +152,11 @@ namespace SolidOtomasyon.BLL.Base
         {
             GeneralFunctions.CreateUnitOfWork<T, TContext>(ref _uow);
 
+            if (!Validation(IslemTuru.EntityUpdate, oldEntity, currentEntity, filter))
+            {
+                return false;
+
+            }
             //Bunun için ayrı bir Fonksiyon tanımlayacağız.
             var degisenAlanlar = oldEntity.DegisenAlanlariGetir(currentEntity);
 
@@ -98,12 +187,22 @@ namespace SolidOtomasyon.BLL.Base
             return _uow.Save();
         }
 
+        // Where bazı durumlarda kullanılacak expresion Örn : İl KartlarındDA
+        protected string BaseYeniKodVer(KartTuru kartTuru, Expression<Func<T, string>> filter, Expression<Func<T, bool>> where = null)
+        {
+            GeneralFunctions.CreateUnitOfWork<T, TContext>(ref _uow);
+
+            return _uow.Rep.YeniKodVer(kartTuru, filter, where);
+        }
+
+
         public void Dispose()
         {
             //Null değil ise Dispose ET Bütün BLL ' i dispose etmiyoruz.
             _ctrl?.Dispose();
             _uow?.Dispose();
         }
+
 
 
     }

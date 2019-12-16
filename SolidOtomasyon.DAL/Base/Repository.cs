@@ -1,4 +1,6 @@
 ﻿using SolidOtomasyon.DAL.Interfaces;
+using SolidOtomasyon.Takip.Common.Enums;
+using SolidOtomasyon.Takip.Common.Functions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -20,11 +22,11 @@ namespace SolidOtomasyon.DAL.Base
         //Çeşitli İşlemler İçin Constructor
         public Repository(DbContext context)
         {
-            if(context == null) { return; }
+            if (context == null) { return; }
             _context = context;
             //DbSet'imizi de atmış olduk.
             _dbSet = _context.Set<T>();
-           
+
         }
 
         #region CRUD İŞLEMLERİ
@@ -58,7 +60,7 @@ namespace SolidOtomasyon.DAL.Base
             foreach (var field in fields)
             {
                 //Hangisinde değişiklik varsa Modifie yap
-                entry.Property(field).IsModified=true;
+                entry.Property(field).IsModified = true;
             }
 
         }
@@ -100,6 +102,68 @@ namespace SolidOtomasyon.DAL.Base
 
         }
 
+
+        //bURDAN dEVAM
+        public string YeniKodVer(KartTuru kartTuru, Expression<Func<T, string>> filter, Expression<Func<T, bool>> where = null)
+        {
+            string Kod()
+            {
+                string kod = null;
+                //Kart Türü Adına Ulaşıyoruz
+                var kodDizi = kartTuru.ToName().Split(' ');
+
+                for (int i = 0; i < kodDizi.Length - 1; i++)
+                {
+                    //indexdeki kelimeyi al -> Okul Kartı ise Okul kısmını alacaktır.
+                    kod += kodDizi[i];
+
+                    if (i + 1 < kodDizi.Length - 1)
+                        //Okul kartı için 
+                        kod += " ";
+                }
+
+                return kod += "-0001";
+            }
+
+
+            string YeniKodVer(string kod) // Okul-0002 geldi ise
+            {
+                var sayisalDegerler = "";
+                foreach (var karakter in kod)
+                {
+                    if (char.IsDigit(karakter))
+                    {
+                        sayisalDegerler += karakter;
+                    }
+                    else
+                        sayisalDegerler = "";
+                }
+
+                var artisSonrasiDeger = (int.Parse(sayisalDegerler) + 1).ToString(); // 0049 ise // 50 olacak
+                var fark = kod.Length - artisSonrasiDeger.Length; 
+                if (fark < 0)
+                    fark = 0;
+
+                //0 ' DAN FARKA KADAR OLAN KARAKTERLERİ ALIYORUZ.
+                var yeniDeger = kod.Substring(0, fark); 
+                yeniDeger += artisSonrasiDeger; // Okul-0050
+
+                return yeniDeger;
+            }
+            //Arttırılmış olarak kodu getirmiş olacak
+            var maxKod = where == null ? _dbSet.Max(filter) : _dbSet.Where(where).Max(filter);
+
+            //max kod null ise Kod() değilse YeniKodVer çalışacak
+            return maxKod == null ? Kod() : YeniKodVer(maxKod);
+        }
+
+        public int Count(Expression<Func<T, bool>> filter = null)
+        {
+
+            return filter == null ? _dbSet.Count() : _dbSet.Count(filter);
+        }
+
+
         #region Dispose İşlemleri
 
         private bool _disposedValue = false;
@@ -111,24 +175,23 @@ namespace SolidOtomasyon.DAL.Base
                 if (disposing)
                 {
                     _context.Dispose();
-               
+
                 }
 
-               
+
 
                 _disposedValue = true;
             }
         }
 
-     
+
         public void Dispose()
-        {      
+        {
             Dispose(true);
             //Garbage Collector ile hafızadan atıyoruz .
-            GC.SuppressFinalize(this);           
+            GC.SuppressFinalize(this);
         }
 
-     
         #endregion
 
     }

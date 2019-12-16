@@ -45,6 +45,12 @@
             // ribbonControl
             // 
             this.ribbonControl.ExpandCollapseItem.Id = 0;
+            // 
+            // 
+            // 
+            this.ribbonControl.SearchEditItem.EditWidth = 150;
+            this.ribbonControl.SearchEditItem.Id = -5000;
+            this.ribbonControl.SearchEditItem.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             this.ribbonControl.Size = new System.Drawing.Size(1144, 102);
             this.ribbonControl.Toolbar.ShowCustomizeItem = false;
             // 
@@ -184,17 +190,15 @@
             this.longNavigator1.Size = new System.Drawing.Size(1144, 24);
             this.longNavigator1.TabIndex = 3;
             // 
-            // OkulKartlari
+            // OkulListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 578);
             this.Controls.Add(this.grid);
             this.Controls.Add(this.longNavigator1);
-            this.Name = "OkulKartlari";
+            this.Name = "OkulListForm";
             this.Text = "Okul Kartları";
-     
-        
             this.Controls.SetChildIndex(this.ribbonControl, 0);
             this.Controls.SetChildIndex(this.longNavigator1, 0);
             this.Controls.SetChildIndex(this.grid, 0);
