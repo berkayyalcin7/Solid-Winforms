@@ -56,7 +56,7 @@ namespace SolidOtomasyon.Forms.FiltreForms
         protected override void Listele()
         {
             //Hangi kartın türüne eşit ise onu getir
-            Tablo.GridControl.DataSource = ((FiltreBll)Bll).List(x=>x.KartTuru == _filtreKartTuru);
+            Tablo.GridControl.DataSource = ((FiltreBll)Bll).List(x=>x.KartTuru == _filtreKartTuru).ToList();
         }
 
         protected override void ShowEditForm(long id)

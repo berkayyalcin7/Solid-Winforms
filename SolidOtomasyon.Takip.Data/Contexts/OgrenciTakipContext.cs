@@ -37,6 +37,7 @@ namespace SolidOtomasyon.Takip.Data.Contexts
         public DbSet<Il> Il { get; set; }
         public DbSet<Ilce> Ilce { get; set; }
         public DbSet<Filtre> Filtre { get; set; }
+        public DbSet<VeliBilgi> VeliBilgi { get; set; }
     
     }
 

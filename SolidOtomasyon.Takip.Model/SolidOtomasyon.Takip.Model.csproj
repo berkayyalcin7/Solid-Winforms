@@ -55,10 +55,12 @@
     <Compile Include="Entities\Base\BaseEntityDurum.cs" />
     <Compile Include="Entities\Base\BaseHareketEntity.cs" />
     <Compile Include="Entities\Base\Interfaces\IBaseEntity.cs" />
+    <Compile Include="Entities\DokumParametreleri.cs" />
     <Compile Include="Entities\Filtre.cs" />
     <Compile Include="Entities\Il.cs" />
     <Compile Include="Entities\Ilce.cs" />
     <Compile Include="Entities\Okul.cs" />
+    <Compile Include="Entities\VeliBilgi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

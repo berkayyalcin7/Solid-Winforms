@@ -6,7 +6,7 @@ using SolidOtomasyon.Functions;
 using SolidOtomasyon.Show;
 using SolidOtomasyon.Takip.Common.Enums;
 using SolidOtomasyon.Takip.Model.Entities;
-
+using System.Linq;
 
 namespace SolidOtomasyon.Forms.IlForms
 {

@@ -12,7 +12,9 @@ namespace SolidOtomasyon.Takip.Common.Enums
         [Description("İlçe Kartı")]
         Ilce = 3,
         [Description("Filtre Kartı")]
-        Filtre = 4
+        Filtre = 4,
+        [Description("Veli Bilgi Kartı")]
+        VeliBilgi = 5
 
 
     }

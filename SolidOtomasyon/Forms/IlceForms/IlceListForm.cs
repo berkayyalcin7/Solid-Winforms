@@ -65,7 +65,7 @@ namespace SolidOtomasyon.Forms.IlceForms
         protected override void Listele()
         {
             //Özel bi sorgu getirmemiz gerek İl id'sine göre ve aktif kartları göster diğer durumlarda FilterFunctions'ı kullanabiliriz
-            Tablo.GridControl.DataSource = ((IlceBll)Bll).List(x=>x.Durum == AktifKartlariGoster && x.IlId==_ilId);
+            Tablo.GridControl.DataSource = ((IlceBll)Bll).List(x => x.Durum == AktifKartlariGoster && x.IlId == _ilId);
         }
 
         protected override void ShowEditForm(long id)

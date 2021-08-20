@@ -37,6 +37,7 @@
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.xtraTabbedMdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.btnVeliBilgiKartlari = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager)).BeginInit();
             this.SuspendLayout();
@@ -48,9 +49,10 @@
             this.ribbonControl.ExpandCollapseItem,
             this.ribbonControl.SearchEditItem,
             this.btnOkulKartlari,
-            this.btnIlKartlari});
+            this.btnIlKartlari,
+            this.btnVeliBilgiKartlari});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 3;
+            this.ribbonControl.MaxItemId = 4;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -82,6 +84,7 @@
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.btnOkulKartlari);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnIlKartlari);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnVeliBilgiKartlari);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // ribbonStatusBar1
@@ -99,6 +102,12 @@
             // xtraTabbedMdiManager
             // 
             this.xtraTabbedMdiManager.MdiParent = this;
+            // 
+            // btnVeliBilgiKartlari
+            // 
+            this.btnVeliBilgiKartlari.Caption = "Veli Bilgi Kartları";
+            this.btnVeliBilgiKartlari.Id = 3;
+            this.btnVeliBilgiKartlari.Name = "btnVeliBilgiKartlari";
             // 
             // AnaForm
             // 
@@ -130,5 +139,6 @@
         private DevExpress.XtraBars.BarButtonItem btnOkulKartlari;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager;
         private DevExpress.XtraBars.BarButtonItem btnIlKartlari;
+        private DevExpress.XtraBars.BarButtonItem btnVeliBilgiKartlari;
     }
 }

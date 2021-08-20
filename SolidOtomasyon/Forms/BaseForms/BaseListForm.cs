@@ -13,6 +13,7 @@ using DevExpress.XtraPrinting.Native;
 using SolidOtomasyon.Show;
 using SolidOtomasyon.Forms.FiltreForms;
 using SolidOtomasyon.Takip.Model.Entities;
+using SolidOtomasyon.Forms.MainForms;
 
 namespace SolidOtomasyon.Forms.BaseForms
 {
@@ -55,8 +56,6 @@ namespace SolidOtomasyon.Forms.BaseForms
 
         }
 
-
-        #region Form Metotlar
         private void EventsLoad()
         {
             //Button Events
@@ -80,295 +79,6 @@ namespace SolidOtomasyon.Forms.BaseForms
             LocationChanged += BaseListForm_LocationChanged;
             SizeChanged += BaseListForm_SizeChanged;
         }
-
-      
-
-        private void BaseListForm_SizeChanged(object sender, EventArgs e)
-        {
-            if (!IsMdiChild)
-            {
-                _formSablonKayitEdilecek = true;
-            }
-       
-        }
-
-        private void BaseListForm_LocationChanged(object sender, EventArgs e)
-        {
-            if (!IsMdiChild)
-            {
-                _formSablonKayitEdilecek = true;
-            }
-        }
-
-
-        private void Tablo_ColumnFilterChanged(object sender, EventArgs e)
-        {
-            //Filtreler devre dışı bırakıldığında filtre Id 0 olmaması lazım 
-            if (string.IsNullOrEmpty(Tablo.ActiveFilterString))
-            {
-                _filtreSeciliId = 0;
-            }
-        }
-
-
-        private void Tablo_FilterEditorCreated(object sender, DevExpress.XtraGrid.Views.Base.FilterControlEventArgs e)
-        {
-            //DevExpres'in default filter editörü kapadık
-            e.ShowFilterEditor = false;
-            ShowEditForms<FiltreEditForm>.ShowDialogEditForm(KartTuru.Filtre, _filtreSeciliId, BaseKartTuru, Tablo.GridControl);
-        }
-
-
-        //Sıralama yaptığımızda'da kaydet
-        private void Tablo_EndSorting(object sender, EventArgs e)
-        {
-            _tabloSablonKayitEdilecek = true;
-        }
-
-        private void Tablo_ColumnPositionChanged(object sender, EventArgs e)
-        {
-            _tabloSablonKayitEdilecek = true;
-        }
-
-        private void Tablo_ColumnWidthChanged(object sender, DevExpress.XtraGrid.Views.Base.ColumnEventArgs e)
-        {
-            _tabloSablonKayitEdilecek = true;
-        }
-
-        private void BaseListForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SablonKaydet();
-        }
-
-        private void BaseListForm_Load(object sender, EventArgs e)
-        {
-            SablonYukle();
-        }
-
-        private void Tablo_MouseUp(object sender, MouseEventArgs e)
-        {
-            //sagTikMenu'muzu gonderiyoruz.
-            e.SagTikMenuGoster(sagTikMenu);
-        }
-
-        private void BaseListForm_Shown(object sender, EventArgs e)
-        {
-            //Form ilk olarak yüklendiği zaman forum için tabloya focuslanmas lazım
-            Tablo.Focus();
-
-            ButonGizleGoster();
-
-            //SablonYukle Fonksiyonu burada çalıştırsaydık -> ilk olarak default yerinde gelicekti sonradan xml değerlerini okuyup düzenleme yapıcaktı o yüzden LOAD Kısmında SablonYukleyi çağırdık
-
-            //SutunGizleGoster();
-
-            //General Funcdan gelicek
-            //Field Name olarak Id string olarak yazılır , aranacak Değer ise SeciliGelecekId olarak gösteriyoruz
-            //Son olarak kontrol null durumu HasValue ' ile değerinin olup olmadığını kontrol eder yok ise return
-            if (IsMdiChild || !SeciliGelecekId.HasValue)
-                return;
-
-            Tablo.RowFocus("Id", SeciliGelecekId);
-        }
-
-        private void ButonGizleGoster()
-        {
-            //Örnek Okul Kartları Kısmında -> Seç Butonu gözükmeyecek çünkü MdiChild şeklinde listeleniyor -> AktifPasifButon False ise gösterme
-            btnSec.Visibility = AktifPasifButonGoster ? BarItemVisibility.Never : IsMdiChild ? BarItemVisibility.Never : BarItemVisibility.Always;
-            //Aynı Zamanda Alttaki Seç texti 
-            barEnter.Visibility = IsMdiChild ? BarItemVisibility.Never : BarItemVisibility.Always;
-            barEnterAciklama.Visibility = IsMdiChild ? BarItemVisibility.Never : BarItemVisibility.Always;
-            //Aktif Pasif Kartlar buton görünürlüğü -> IsMdiChild değil ise gösterme diğer bütün durumlarda göster 
-            btnAktifPasifKartlar.Visibility = AktifPasifButonGoster ? BarItemVisibility.Always : !IsMdiChild ? BarItemVisibility.Never : BarItemVisibility.Always;
-
-            //Normal foreach ' de olabilir
-            ShowItems?.ForEach(x => x.Visibility = BarItemVisibility.Always);
-            HideItems?.ForEach(x => x.Visibility = BarItemVisibility.Never);
-
-
-        }
-
-        private void SutunGizleGoster()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SablonKaydet()
-        {
-            //True ise kaydet
-            if (_formSablonKayitEdilecek)
-            {
-                Name.FormSablonKaydet(Left,Top,Width,Height,WindowState);
-            }
-            if(_tabloSablonKayitEdilecek)
-            {
-                Tablo.TabloSablonKaydet(IsMdiChild ? Name + " Tablosu" : Name + " TablosuMDI");
-            }
-        }
-
-        private void SablonYukle()
-        {
-            if (IsMdiChild)
-            {
-                //Mdi ise Size kaydetmememiz gerekiyor çünkü tam ekran olarak açılacak her yerde
-                Tablo.TabloSablonYukle(Name + " Tablosu");
-            }
-            else
-            {
-                //Üzerinde çalıştığımız form -> // MDI olması durumunda yani Child değil
-                Name.FormSablonYukle(this);
-                Tablo.TabloSablonYukle(Name + "TablosuMDI");
-            }
-        }
-
-        protected internal void Yukle()
-        {
-            DegiskenleriDoldur();
-
-            EventsLoad();
-
-            //Sonradan kullanılacka
-            Tablo.OptionsSelection.MultiSelect = MultiSelect;
-
-            //Hangi Grid navigate olacak
-            Navigator.NavigatableControl = Tablo.GridControl;
-
-            //Listeleme işlemi sırasında
-            Cursor.Current = Cursors.WaitCursor;
-            Listele();
-            Cursor.Current = DefaultCursor;
-
-            //Guncellenicek
-
-        }
-
-        protected virtual void DegiskenleriDoldur() { }
-
-
-        //Generic oluşturacağız ve Hangi Formu göstereceğini belirleyeceğiz.
-        //ID alanına göre çekeceğiz
-        //override edeceğiz ' İlçe için İl Id ve Il Adi göndereceğiz
-        protected virtual void ShowEditForm(long id)
-        {
-            //Hangi formu açacağını bilmesi lazım -> Intrerfaceden ulaşacağız.
-            var result = FormShow.ShowDialogEditForm(BaseKartTuru, id);
-            //Ayrı kullanacağımız için farklı fonksiyon içine yazdık
-            ShowEditFormDefault(result);
-        }
-
-        //Ekleme işleminden sonra formun kapanması ve o değere focuslanması
-        protected void ShowEditFormDefault(long id)
-        {
-            if (id <= 0)
-                return;
-            AktifKartlariGoster = true;
-            FormCaptionAyarlar();
-            Tablo.RowFocus("Id", id);
-
-        }
-
-
-        protected virtual void EntityDelete()
-        {
-            var entity = Tablo.GetRow<BaseEntity>();
-            if (entity == null)
-            {
-                return;
-            }
-            //Bll'den delete function ulaşmak lazım // Başarısızsa return yap
-            if (!((IBaseCommonBll)Bll).Delete(entity))
-            {
-                return;
-            }
-            Tablo.DeleteSelectedRows();
-            //Silme sonrası focus işlemi
-            Tablo.RowFocus(Tablo.FocusedRowHandle);
-        }
-
-        private void SelectEntity()
-        {
-            //MultiSelect var ise çeşitli eklemeler yapılacak
-            if (MultiSelect)
-            {
-                //Güncellenecek
-            }
-            else
-            {
-                //Seçilen bilgi satır bir yere kaydolması gerekiyor
-                SelectedEntity = Tablo.GetRow<BaseEntity>();
-            }
-
-            DialogResult = DialogResult.OK;
-            Close();
-
-        }
-        protected virtual void Listele() { }
-
-
-        private void FiltreSec()
-        {
-            //son 2 parametre Uygulanacağı kart türü ve uygulanacağı grid
-            var entity = (Filtre)ShowListForms<FiltreListForm>.ShowDialogListForm(KartTuru.Filtre, _filtreSeciliId,BaseKartTuru,Tablo.GridControl);
-
-            if (entity == null)
-            {
-                return;
-            }
-
-            _filtreSeciliId = entity.Id;
-            Tablo.ActiveFilterString = entity.FiltreMetni;
-
-        }
-
-        private void Yazdir()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void FormCaptionAyarlar()
-        {
-            //Aktif pasif kartlar ayar
-            if (btnAktifPasifKartlar == null)
-            {
-                //Pasif kartların bazı durumlarda gözükmemesi için null durumları oluşabiliyor
-                Listele();
-                return;
-            }
-
-            if (AktifKartlariGoster)
-            {
-                btnAktifPasifKartlar.Caption = "Pasif Kartlar";
-                //Örnek : OKUL KARTLARI
-                Tablo.ViewCaption = Text;
-            }
-            else
-            {
-                btnAktifPasifKartlar.Caption = "Aktif Kartlar";
-                //Tablonun üst Kısmında Ek Olarak Pasif Kartlar olarak Belirticek  Örnek : OKUL KARTLARI Pasif Kartlar
-                Tablo.ViewCaption = Text + " - Pasif Kartlar";
-            }
-
-            Listele();
-        }
-
-        private void IslemTuruSec()
-        {
-            // Ana Formun içindeki Açılan form MdiChild Form olarak geçer
-            if (!IsMdiChild)
-            {
-                // Bu Kısım Güncellenicektir.
-                SelectEntity();
-            }
-            else
-            {
-                btnDuzelt.PerformClick();
-            }
-        }
-
-        #endregion
-
-
-
 
 
         private void Button_ItemClick(object sender, ItemClickEventArgs e)
@@ -479,11 +189,6 @@ namespace SolidOtomasyon.Forms.BaseForms
             Cursor.Current = DefaultCursor;
         }
 
-        protected virtual void BagliKartAc()
-        {
-
-        }
-
         private void Tablo_DoubleClick(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -503,6 +208,296 @@ namespace SolidOtomasyon.Forms.BaseForms
                     break;
             }
         }
+        private void BaseListForm_SizeChanged(object sender, EventArgs e)
+        {
+            if (!IsMdiChild)
+            {
+                _formSablonKayitEdilecek = true;
+            }
+       
+        }
+
+        private void BaseListForm_LocationChanged(object sender, EventArgs e)
+        {
+            if (!IsMdiChild)
+            {
+                _formSablonKayitEdilecek = true;
+            }
+        }
+
+        private void Tablo_ColumnFilterChanged(object sender, EventArgs e)
+        {
+            //Filtreler devre dışı bırakıldığında filtre Id 0 olmaması lazım 
+            if (string.IsNullOrEmpty(Tablo.ActiveFilterString))
+            {
+                _filtreSeciliId = 0;
+            }
+        }
+
+        private void Tablo_FilterEditorCreated(object sender, DevExpress.XtraGrid.Views.Base.FilterControlEventArgs e)
+        {
+            //DevExpres'in default filter editörü kapadık
+            e.ShowFilterEditor = false;
+            ShowEditForms<FiltreEditForm>.ShowDialogEditForm(KartTuru.Filtre, _filtreSeciliId, BaseKartTuru, Tablo.GridControl);
+        }
+
+        //Sıralama yaptığımızda'da kaydet
+        private void Tablo_EndSorting(object sender, EventArgs e)
+        {
+            _tabloSablonKayitEdilecek = true;
+        }
+
+        private void Tablo_ColumnPositionChanged(object sender, EventArgs e)
+        {
+            _tabloSablonKayitEdilecek = true;
+        }
+
+        private void Tablo_ColumnWidthChanged(object sender, DevExpress.XtraGrid.Views.Base.ColumnEventArgs e)
+        {
+            _tabloSablonKayitEdilecek = true;
+        }
+
+        private void BaseListForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SablonKaydet();
+        }
+
+        private void BaseListForm_Load(object sender, EventArgs e)
+        {
+            SablonYukle();
+        }
+
+        private void Tablo_MouseUp(object sender, MouseEventArgs e)
+        {
+            //sagTikMenu'muzu gonderiyoruz.
+            e.SagTikMenuGoster(sagTikMenu);
+        }
+
+        private void BaseListForm_Shown(object sender, EventArgs e)
+        {
+            //Form ilk olarak yüklendiği zaman forum için tabloya focuslanmas lazım
+            Tablo.Focus();
+
+            ButonGizleGoster();
+
+            //SablonYukle Fonksiyonu burada çalıştırsaydık -> ilk olarak default yerinde gelicekti sonradan xml değerlerini okuyup düzenleme yapıcaktı o yüzden LOAD Kısmında SablonYukleyi çağırdık
+
+            //SutunGizleGoster();
+
+            //General Funcdan gelicek
+            //Field Name olarak Id string olarak yazılır , aranacak Değer ise SeciliGelecekId olarak gösteriyoruz
+            //Son olarak kontrol null durumu HasValue ' ile değerinin olup olmadığını kontrol eder yok ise return
+            if (IsMdiChild || !SeciliGelecekId.HasValue)
+                return;
+
+            Tablo.RowFocus("Id", SeciliGelecekId);
+        }
+
+
+        #region Form Metotlar
+        private void ButonGizleGoster()
+        {
+            //Örnek Okul Kartları Kısmında -> Seç Butonu gözükmeyecek çünkü MdiChild şeklinde listeleniyor -> AktifPasifButon False ise gösterme
+            btnSec.Visibility = AktifPasifButonGoster ? BarItemVisibility.Never : IsMdiChild ? BarItemVisibility.Never : BarItemVisibility.Always;
+            //Aynı Zamanda Alttaki Seç texti 
+            barEnter.Visibility = IsMdiChild ? BarItemVisibility.Never : BarItemVisibility.Always;
+            barEnterAciklama.Visibility = IsMdiChild ? BarItemVisibility.Never : BarItemVisibility.Always;
+            //Aktif Pasif Kartlar buton görünürlüğü -> IsMdiChild değil ise gösterme diğer bütün durumlarda göster 
+            btnAktifPasifKartlar.Visibility = AktifPasifButonGoster ? BarItemVisibility.Always : !IsMdiChild ? BarItemVisibility.Never : BarItemVisibility.Always;
+
+            //Normal foreach ' de olabilir
+            ShowItems?.ForEach(x => x.Visibility = BarItemVisibility.Always);
+            HideItems?.ForEach(x => x.Visibility = BarItemVisibility.Never);
+
+
+        }
+
+        private void SutunGizleGoster()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SablonKaydet()
+        {
+            //True ise kaydet
+            if (_formSablonKayitEdilecek)
+            {
+                Name.FormSablonKaydet(Left,Top,Width,Height,WindowState);
+            }
+            if(_tabloSablonKayitEdilecek)
+            {
+                Tablo.TabloSablonKaydet(IsMdiChild ? Name + " Tablosu" : Name + " TablosuMDI");
+            }
+        }
+
+        private void SablonYukle()
+        {
+            if (IsMdiChild)
+            {
+                //Mdi ise Size kaydetmememiz gerekiyor çünkü tam ekran olarak açılacak her yerde
+                Tablo.TabloSablonYukle(Name + " Tablosu");
+            }
+            else
+            {
+                //Üzerinde çalıştığımız form -> // MDI olması durumunda yani Child değil
+                Name.FormSablonYukle(this);
+                Tablo.TabloSablonYukle(Name + "TablosuMDI");
+            }
+        }
+
+        protected internal void Yukle()
+        {
+            DegiskenleriDoldur();
+
+            EventsLoad();
+
+            //Sonradan kullanılacka
+            Tablo.OptionsSelection.MultiSelect = MultiSelect;
+
+            //Hangi Grid navigate olacak
+            Navigator.NavigatableControl = Tablo.GridControl;
+
+            //Listeleme işlemi sırasında
+            Cursor.Current = Cursors.WaitCursor;
+            Listele();
+            Cursor.Current = DefaultCursor;
+
+            //Guncellenicek
+
+        }
+
+        protected virtual void DegiskenleriDoldur() { }
+
+        //Generic oluşturacağız ve Hangi Formu göstereceğini belirleyeceğiz.
+        //ID alanına göre çekeceğiz
+        //override edeceğiz ' İlçe için İl Id ve Il Adi göndereceğiz
+        protected virtual void ShowEditForm(long id)
+        {
+            //Hangi formu açacağını bilmesi lazım -> Intrerfaceden ulaşacağız.
+            var result = FormShow.ShowDialogEditForm(BaseKartTuru, id);
+            //Ayrı kullanacağımız için farklı fonksiyon içine yazdık
+            ShowEditFormDefault(result);
+        }
+
+        //Ekleme işleminden sonra formun kapanması ve o değere focuslanması
+        protected void ShowEditFormDefault(long id)
+        {
+            if (id <= 0)
+                return;
+            AktifKartlariGoster = true;
+            FormCaptionAyarlar();
+            Tablo.RowFocus("Id", id);
+
+        }
+
+
+        protected virtual void EntityDelete()
+        {
+            var entity = Tablo.GetRow<BaseEntity>();
+            if (entity == null)
+            {
+                return;
+            }
+            //Bll'den delete function ulaşmak lazım // Başarısızsa return yap
+            if (!((IBaseCommonBll)Bll).Delete(entity))
+            {
+                return;
+            }
+            Tablo.DeleteSelectedRows();
+            //Silme sonrası focus işlemi
+            Tablo.RowFocus(Tablo.FocusedRowHandle);
+        }
+
+        private void SelectEntity()
+        {
+            //MultiSelect var ise çeşitli eklemeler yapılacak
+            if (MultiSelect)
+            {
+                //Güncellenecek
+            }
+            else
+            {
+                //Seçilen bilgi satır bir yere kaydolması gerekiyor
+                SelectedEntity = Tablo.GetRow<BaseEntity>();
+            }
+
+            DialogResult = DialogResult.OK;
+            Close();
+
+        }
+        protected virtual void Listele() { }
+
+
+        private void FiltreSec()
+        {
+            //son 2 parametre Uygulanacağı kart türü ve uygulanacağı grid
+            var entity = (Filtre)ShowListForms<FiltreListForm>.ShowDialogListForm(KartTuru.Filtre, _filtreSeciliId,BaseKartTuru,Tablo.GridControl);
+
+            if (entity == null)
+            {
+                return;
+            }
+
+            _filtreSeciliId = entity.Id;
+            Tablo.ActiveFilterString = entity.FiltreMetni;
+
+        }
+
+        protected virtual void Yazdir()
+        {
+            TablePrintingFunctions.Yazdir(Tablo,Tablo.ViewCaption,AnaForm.SubeAdi);
+        }
+
+        private void FormCaptionAyarlar()
+        {
+            //Aktif pasif kartlar ayar
+            if (btnAktifPasifKartlar == null)
+            {
+                //Pasif kartların bazı durumlarda gözükmemesi için null durumları oluşabiliyor
+                Listele();
+                return;
+            }
+
+            if (AktifKartlariGoster)
+            {
+                btnAktifPasifKartlar.Caption = "Pasif Kartlar";
+                //Örnek : OKUL KARTLARI
+                Tablo.ViewCaption = Text;
+            }
+            else
+            {
+                btnAktifPasifKartlar.Caption = "Aktif Kartlar";
+                //Tablonun üst Kısmında Ek Olarak Pasif Kartlar olarak Belirticek  Örnek : OKUL KARTLARI Pasif Kartlar
+                Tablo.ViewCaption = Text + " - Pasif Kartlar";
+            }
+
+            Listele();
+        }
+
+        private void IslemTuruSec()
+        {
+            // Ana Formun içindeki Açılan form MdiChild Form olarak geçer
+            if (!IsMdiChild)
+            {
+                // Bu Kısım Güncellenicektir.
+                SelectEntity();
+            }
+            else
+            {
+                btnDuzelt.PerformClick();
+            }
+        }
+
+        protected virtual void BagliKartAc()
+        {
+
+        }
+
+        #endregion
+
+
+
+
 
     }
 }

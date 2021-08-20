@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraBars;
 using SolidOtomasyon.Forms.IlForms;
 using SolidOtomasyon.Forms.OkulForms;
+using SolidOtomasyon.Forms.VeliBilgiForms;
 using SolidOtomasyon.Show;
 using SolidOtomasyon.Takip.Common.Enums;
 
@@ -8,7 +9,10 @@ namespace SolidOtomasyon.Forms.MainForms
 {
     public partial class AnaForm : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        public AnaForm()
+
+        public static string DonemAdi = "Dönem Bilgisi Bekleniyor...";
+        public static string SubeAdi = "Şube Bilgisi Bekleniyor...";
+        public AnaForm() 
         {
             InitializeComponent();
             //Çalışması için Constructora ekliyoruz.
@@ -43,6 +47,10 @@ namespace SolidOtomasyon.Forms.MainForms
             else if(e.Item==btnIlKartlari)
             {
                 ShowListForms<IlListForm>.ShowListForm(KartTuru.Il);
+            }
+            else if (e.Item==btnVeliBilgiKartlari)
+            {
+                ShowListForms<VeliBilgiListForm>.ShowListForm(KartTuru.VeliBilgi);
             }
         }
     }

@@ -8,6 +8,7 @@ using SolidOtomasyon.Interfaces;
 using SolidOtomasyon.Takip.Common.Enums;
 using SolidOtomasyon.Takip.Common.Message;
 using SolidOtomasyon.Takip.Model.Entities.Base;
+using SolidOtomasyon.Takip.Model.Entities.Base.Interfaces;
 using SolidOtomasyon.UserControls.Controls;
 using SolidOtomasyon.UserControls.Grid;
 using System;
@@ -78,7 +79,11 @@ namespace SolidOtomasyon.Forms.BaseForms
                         //EditValue Change ile aynı işlemi yapsın ...
                         edt.FilterChanged += Control_EditValueChanged;
                         break;
-
+                    case ComboBoxEdit edt:
+                        
+                        edt.EditValueChanged += Control_EditValueChanged;   
+                        edt.SelectedValueChanged += Control_SelectedValueChanged;
+                        break;
                     case MyButtonEdit edt:
                         edt.IdChanged += Control_IdChanged;
                         edt.EnabledChange += Control_EnabledChange;
@@ -112,6 +117,13 @@ namespace SolidOtomasyon.Forms.BaseForms
 
         }
 
+
+        //Tablo DÖküm işleminde bunu kullanacağız
+        protected virtual void Control_SelectedValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
         //Status Bar için işlemler
         private void Control_Leave(object sender, EventArgs e)
         {
@@ -127,7 +139,7 @@ namespace SolidOtomasyon.Forms.BaseForms
             var type = sender.GetType();
 
             //Buton içeren kontroller 
-            if (type==typeof(MyButtonEdit) || type==typeof(MyGridView) || type==typeof(MyPictureEdit) || type == typeof(MyComboBoxEdit) || type==typeof(MyDateEdit))
+            if (type == typeof(MyButtonEdit) || type == typeof(MyGridView) || type == typeof(MyPictureEdit) || type == typeof(MyComboBoxEdit) || type == typeof(MyDateEdit))
             {
                 statusBarKisaYol.Visibility = BarItemVisibility.Always;
                 statusBarKisaYolAciklama.Visibility = BarItemVisibility.Always;
@@ -135,10 +147,10 @@ namespace SolidOtomasyon.Forms.BaseForms
                 statusBarAciklama.Caption = ((IStatusBarAciklama)sender).StatusBarAciklama;
 
                 statusBarKisaYol.Caption = ((IStatusBarKisaYol)sender).StatusBarKisaYol;
-                statusBarKisaYolAciklama.Caption= ((IStatusBarKisaYol)sender).StatusBarKisaYolAciklama;
+                statusBarKisaYolAciklama.Caption = ((IStatusBarKisaYol)sender).StatusBarKisaYolAciklama;
             }
 
-            else if(sender is IStatusBarAciklama ctrl)
+            else if (sender is IStatusBarAciklama ctrl)
             {
                 statusBarAciklama.Caption = ctrl.StatusBarAciklama;
             }
@@ -245,7 +257,6 @@ namespace SolidOtomasyon.Forms.BaseForms
 
         }
 
-
         private void Button_ItemClick(object sender, ItemClickEventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -275,10 +286,21 @@ namespace SolidOtomasyon.Forms.BaseForms
                 //Yetki Kontrolü
                 EntityDelete();
             }
-            else if (e.Item==btnUygula)
+            else if (e.Item == btnUygula)
             {
                 FiltreUygula();
             }
+
+            else if (e.Item == btnYazdir)
+            {
+                Yazdir();
+            }
+
+            else if (e.Item == btnBaskiOnizleme)
+            {
+                BaskiOnizleme();
+            }
+
 
             else if (e.Item == btnCikis)
             {
@@ -289,9 +311,23 @@ namespace SolidOtomasyon.Forms.BaseForms
 
         }
 
+
+
+
+
+        protected virtual void BaskiOnizleme()
+        {
+
+        }
+
+        protected virtual void Yazdir()
+        {
+
+        }
+
         private void FarkliKaydet()
         {
-            if (Messages.EvetSeciliEvetHayir("Bu Filtre Referans Alınarak Yeni Bir Kayıt Oluşturulacaktır . Onaylıyor musunuz ?","Kayıt Onay")!=DialogResult.Yes)
+            if (Messages.EvetSeciliEvetHayir("Bu Filtre Referans Alınarak Yeni Bir Kayıt Oluşturulacaktır . Onaylıyor musunuz ?", "Kayıt Onay") != DialogResult.Yes)
             {
                 return;
 
@@ -338,7 +374,7 @@ namespace SolidOtomasyon.Forms.BaseForms
 
         }
         protected virtual void SecimYap(object sender) { }
-    
+
 
         private void EntityDelete()
         {
@@ -354,11 +390,11 @@ namespace SolidOtomasyon.Forms.BaseForms
         private void GeriAl()
         {
             //Tek bir yerde kullandıracağız ->Yes durumunda işlem türüüne bakılacak
-            if (Messages.HayirSeciliEvetHayir("Yapılan Değişiklikler Geri Alınacaktır. Onaylıyor musunuz ?","Geri Al Onay")!=DialogResult.Yes)
+            if (Messages.HayirSeciliEvetHayir("Yapılan Değişiklikler Geri Alınacaktır. Onaylıyor musunuz ?", "Geri Al Onay") != DialogResult.Yes)
             {
                 return;
             }
-            if (IslemTuru==IslemTuru.EntityUpdate)
+            if (IslemTuru == IslemTuru.EntityUpdate)
             {
                 Yukle();
             }
@@ -452,6 +488,13 @@ namespace SolidOtomasyon.Forms.BaseForms
         {
 
         }
+
+        //Entity oluşturup geriye döndürmek override ile kullanıcağız
+        protected internal virtual IBaseEntity ReturnEntity()
+        {
+            return null;
+        }
+
 
         protected virtual void NesneyiKontrollereBagla()
         {
