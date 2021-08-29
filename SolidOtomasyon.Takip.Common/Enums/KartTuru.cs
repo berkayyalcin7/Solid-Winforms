@@ -14,7 +14,9 @@ namespace SolidOtomasyon.Takip.Common.Enums
         [Description("Filtre Kartı")]
         Filtre = 4,
         [Description("Veli Bilgi Kartı")]
-        VeliBilgi = 5
+        VeliBilgi = 5,
+        [Description("İptal Nedeni Kartı")]
+        IptalNedeni = 6,
 
 
     }

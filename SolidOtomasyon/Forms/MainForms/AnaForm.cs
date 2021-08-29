@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraBars;
 using SolidOtomasyon.Forms.IlForms;
+using SolidOtomasyon.Forms.IptalNedeniForms;
 using SolidOtomasyon.Forms.OkulForms;
 using SolidOtomasyon.Forms.VeliBilgiForms;
 using SolidOtomasyon.Show;
@@ -12,6 +13,7 @@ namespace SolidOtomasyon.Forms.MainForms
 
         public static string DonemAdi = "Dönem Bilgisi Bekleniyor...";
         public static string SubeAdi = "Şube Bilgisi Bekleniyor...";
+
         public AnaForm() 
         {
             InitializeComponent();
@@ -51,6 +53,10 @@ namespace SolidOtomasyon.Forms.MainForms
             else if (e.Item==btnVeliBilgiKartlari)
             {
                 ShowListForms<VeliBilgiListForm>.ShowListForm(KartTuru.VeliBilgi);
+            }
+            else if (e.Item==btnIptalNedeniKartlari)
+            {
+                ShowListForms<IptalNedeniListForm>.ShowListForm(KartTuru.IptalNedeni);
             }
         }
     }

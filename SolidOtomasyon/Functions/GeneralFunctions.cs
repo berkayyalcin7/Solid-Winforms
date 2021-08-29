@@ -103,7 +103,7 @@ namespace SolidOtomasyon.Functions
         public static void ButonEnabledDurumu<T>(BarButtonItem btnKaydet, BarButtonItem btnFarkliKaydet, BarButtonItem btnSil,IslemTuru islemTuru, T oldEntity, T currentEntity)
         {
             var veriDegisimYeri = VeriDegisimYeriGetir(oldEntity, currentEntity);
-            //Eşitse true
+           
             var buttonEnabledDurum = veriDegisimYeri == VeriDegisimYeri.Alan;
             //Veri Girilmişse Kaydet ve Geri Enabled Olacak
             btnKaydet.Enabled = buttonEnabledDurum;

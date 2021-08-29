@@ -59,6 +59,7 @@
     <Compile Include="Entities\Filtre.cs" />
     <Compile Include="Entities\Il.cs" />
     <Compile Include="Entities\Ilce.cs" />
+    <Compile Include="Entities\IptalNedeni.cs" />
     <Compile Include="Entities\Okul.cs" />
     <Compile Include="Entities\VeliBilgi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -55,6 +55,7 @@
     <Compile Include="Functions\Converts.cs" />
     <Compile Include="Functions\GeneralFunctions.cs" />
     <Compile Include="Functions\ValidationFunctions.cs" />
+    <Compile Include="General\IptalNedeniBll.cs" />
     <Compile Include="General\VeliBilgiBll.cs" />
     <Compile Include="General\FiltreBll.cs" />
     <Compile Include="General\IlBll.cs" />
