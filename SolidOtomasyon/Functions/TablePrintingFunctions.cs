@@ -51,7 +51,7 @@ namespace SolidOtomasyon.Functions
             //tablodakileri componente aktarıyozuz
             _link.Component = _tablo.GridControl;
             //Kağıt Tipi
-            _link.PaperKind = PaperKind.Letter;
+            //_link.PaperKind = PaperKind.Letter;
             //Ayarlanmış rakamlardır 
             _link.Margins = new Margins(59, 59, 115, 48);    
             _link.CreateMarginalHeaderArea += Link_CreateMarginalHeaderArea;
